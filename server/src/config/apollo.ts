@@ -1,15 +1,7 @@
-import { ApolloServer, gql } from "apollo-server-express";
+import { ApolloGateway } from "@apollo/gateway";
+import { ApolloServer } from "apollo-server-express";
 
-
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
-const resolvers = {
-  Query: {
-    hello: () => "world",
-  },
-};
-
-export const server = new ApolloServer({ typeDefs, resolvers });
+const gateway = new ApolloGateway({
+  serviceList: [{ name: "accounts", url: process.env.ACCOUNTS_SERVICE_URL }],
+});
+export const server = new ApolloServer({ gateway, subscriptions: false });
