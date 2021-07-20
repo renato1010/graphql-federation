@@ -1,7 +1,8 @@
-import { ApolloGateway, RemoteGraphQLDataSource } from "@apollo/gateway";
+import { Request } from "express";
 import { ApolloServer } from "apollo-server-express";
+import { ApolloGateway, RemoteGraphQLDataSource } from "@apollo/gateway";
 
-const gateway = new ApolloGateway({
+const gateway: any = new ApolloGateway({
   serviceList: [{ name: "accounts", url: process.env.ACCOUNTS_SERVICE_URL }],
   buildService: ({ url }) => {
     return new RemoteGraphQLDataSource({
@@ -13,10 +14,10 @@ const gateway = new ApolloGateway({
   },
 });
 export const server = new ApolloServer({
-  gateway,
-  subscriptions: false,
-  context: ({ req }: { req: Record<string, any> }) => {
-    const user = req.user || null;
+  gateway: gateway,
+  context: ({ req }: { req: Request & { user: Record<string, any> } }) => {
+    const user = req?.user ?? null;
     return { user };
   },
+  subscriptions: false,
 });

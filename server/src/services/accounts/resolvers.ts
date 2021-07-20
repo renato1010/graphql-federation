@@ -13,7 +13,7 @@ export const resolvers = {
   },
   Query: {
     viewer: (_: undefined, args: Record<string, any>, { user }: { user: Record<string, any> }, info: any) => {
-      console.log(user);
+      console.log({ user });
       return accounts[0];
     },
   },

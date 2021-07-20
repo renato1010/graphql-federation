@@ -6,7 +6,8 @@ export const getToken = async (username: string, password: string) => {
   if (
     !process.env.AUTH0_AUDIENCE ||
     !process.env.AUTH0_CLIENT_ID_GRAPHQL ||
-    !process.env.AUTH0_CLIENT_SECRET_GRAPHQL
+    !process.env.AUTH0_CLIENT_SECRET_GRAPHQL ||
+    !process.env.AUTH0_DOMAIN
   ) {
     throw new Error("env vars not loaded");
   }
@@ -22,6 +23,7 @@ export const getToken = async (username: string, password: string) => {
     const response = await fetch(`https://${process.env.AUTH0_DOMAIN}/oauth/token`, {
       method: "POST",
       body: params,
+      headers: { "content-type": "application/x-www-form-urlencoded" },
     });
 
     const data = await response.json();
