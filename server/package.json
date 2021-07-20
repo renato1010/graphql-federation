@@ -9,7 +9,6 @@
     "dev:gateway": "wait-on tcp:4001 && nodemon -r dotenv/config --config nodemon.json src/index.ts",
     "build": "tsc -p ./src",
     "get:token": "ts-node -r dotenv/config src/lib/getToken.ts",
-    "get:secret": "ts-node -r dotenv/config src/lib/getSecret.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
