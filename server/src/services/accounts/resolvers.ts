@@ -89,9 +89,11 @@ export const resolvers: GraphQLResolverMap<any> = {
         where: { id },
       } = args as { where: { id: string } };
       try {
+        // check if id belongs to a user
+        await auth0.getUser({ id });
         await auth0.deleteUser({ id });
         return true;
-      } catch {
+      } catch (error) {
         return false;
       }
     },
