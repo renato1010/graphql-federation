@@ -24,7 +24,8 @@ export const resolvers: GraphQLResolverMap<any> = {
   },
   Query: {
     account: (parent: undefined, args: Record<string, any>, context: any, info: any) => {
-      return auth0.getUser({ id: args.id });
+      const { id } = args as Record<string, string>;
+      return auth0.getUser({ id });
     },
     accounts: (parent: undefined, args: Record<string, any>, context: any, info: any) => {
       return auth0.getUsers();
