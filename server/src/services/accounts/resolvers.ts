@@ -42,4 +42,12 @@ export const resolvers: GraphQLResolverMap<any> = {
       return null;
     },
   },
+  Mutation: {
+    createAccount(parent: undefined, args: Record<string, any>, context: any, info: any) {
+      const {
+        data: { email, password },
+      } = args as { data: { email: string; password: string } };
+      return auth0.createUser({ connection: "Username-Password-Authentication", email, password });
+    },
+  },
 };

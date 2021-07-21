@@ -11,4 +11,11 @@ export const typeDefs = gql`
     accounts: [Account]
     viewer: Account
   }
+  input CreateAccountInput {
+    email: String!
+    password: String!
+  }
+  extend type Mutation {
+    createAccount(data: CreateAccountInput): Account!
+  }
 `;
