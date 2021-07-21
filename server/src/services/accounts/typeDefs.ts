@@ -26,5 +26,6 @@ export const typeDefs = gql`
   extend type Mutation {
     createAccount(data: CreateAccountInput): Account!
     updateAccount(data: updateAccountInput!, where: AccountWhereUniqueInput!): Account!
+    deleteAccount(where: AccountWhereUniqueInput!): Boolean!
   }
 `;

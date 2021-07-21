@@ -84,5 +84,16 @@ export const resolvers: GraphQLResolverMap<any> = {
         return auth0.updateUser({ id }, { email });
       }
     },
+    deleteAccount: async (_parent: undefined, args: Record<string, any>, _context: any, _info: any) => {
+      const {
+        where: { id },
+      } = args as { where: { id: string } };
+      try {
+        await auth0.deleteUser({ id });
+        return true;
+      } catch {
+        return false;
+      }
+    },
   },
 };

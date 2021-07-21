@@ -27,13 +27,13 @@ export const getToken = async (username: string, password: string): Promise<stri
     });
 
     const data = await response.json();
-    console.log({ data: data?.access_token ?? "no token" });
+    // console.log({ data: data?.access_token ?? "no token" });
     return data?.access_token ?? null;
   } catch (error) {
     throw new Error(error);
   }
 };
 
-(async () => {
-  await getToken("contact@renatoperez.dev", "Contact101010");
-})();
+// (async () => {
+//   await getToken("contact@renatoperez.dev", "Contact101010");
+// })();
