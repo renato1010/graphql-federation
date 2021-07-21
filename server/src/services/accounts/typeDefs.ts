@@ -15,7 +15,16 @@ export const typeDefs = gql`
     email: String!
     password: String!
   }
+  input AccountWhereUniqueInput {
+    id: ID!
+  }
+  input updateAccountInput {
+    email: String
+    newPassword: String
+    password: String
+  }
   extend type Mutation {
     createAccount(data: CreateAccountInput): Account!
+    updateAccount(data: updateAccountInput!, where: AccountWhereUniqueInput!): Account!
   }
 `;

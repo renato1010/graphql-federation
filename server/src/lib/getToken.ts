@@ -1,7 +1,7 @@
 import { URLSearchParams } from "url";
 import fetch from "node-fetch";
 
-export const getToken = async (username: string, password: string) => {
+export const getToken = async (username: string, password: string): Promise<string | null> => {
   const params = new URLSearchParams();
   if (
     !process.env.AUTH0_AUDIENCE ||
@@ -27,12 +27,13 @@ export const getToken = async (username: string, password: string) => {
     });
 
     const data = await response.json();
-    console.log({ data });
+    console.log({ data: data?.access_token ?? "no token" });
+    return data?.access_token ?? null;
   } catch (error) {
     throw new Error(error);
   }
 };
 
 (async () => {
-  await getToken("renatoperezc@gmail.com", "Rp101010");
+  await getToken("contact@renatoperez.dev", "Contact101010");
 })();
