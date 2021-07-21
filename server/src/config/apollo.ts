@@ -15,7 +15,7 @@ const gateway: any = new ApolloGateway({
 });
 export const server = new ApolloServer({
   gateway: gateway,
-  context: ({ req }: { req: Request & { user: Record<string, any> } }) => {
+  context: ({ req }: { req: Request & { user: Record<string, any> } }): Record<string, any> => {
     const user = req?.user ?? null;
     return { user };
   },
