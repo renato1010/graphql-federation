@@ -5,6 +5,7 @@ export const typeDefs = gql`
     id: ID!
     email: String
     createdAt: String!
+    isModerator: Boolean
   }
   extend type Query {
     account(id: ID!): Account!

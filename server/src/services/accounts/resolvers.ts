@@ -24,6 +24,14 @@ export const resolvers: GraphQLResolverMap<any> = {
       _context: Record<string, any>,
       _info: any
     ) => account.created_at!,
+    isModerator: (
+      account: User<AppMetadata, UserMetadata>,
+      args: Record<string, any>,
+      _context: Record<string, any>,
+      _info: any
+    ) => {
+      return (account?.app_metadata?.roles as string[])?.includes("moderator") ?? false;
+    },
   },
   Query: {
     account: (_parent: undefined, args: Record<string, any>, _context: any, _info: any) => {
