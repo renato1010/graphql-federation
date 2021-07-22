@@ -6,6 +6,7 @@ export const typeDefs = gql`
     email: String
     createdAt: String!
     isModerator: Boolean
+    isBlocked: Boolean
   }
   extend type Query {
     account(id: ID!): Account!
@@ -29,5 +30,6 @@ export const typeDefs = gql`
     updateAccount(data: updateAccountInput!, where: AccountWhereUniqueInput!): Account!
     deleteAccount(where: AccountWhereUniqueInput!): Boolean!
     changeAccountModeratorRole(where: AccountWhereUniqueInput): Account!
+    changeAccountBlockedStatus(where: AccountWhereUniqueInput): Account!
   }
 `;

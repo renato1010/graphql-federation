@@ -32,6 +32,12 @@ export const resolvers: GraphQLResolverMap<any> = {
     ) => {
       return (account?.app_metadata?.roles as string[])?.includes("moderator") ?? false;
     },
+    isBlocked: (
+      account: User<AppMetadata, UserMetadata>,
+      args: Record<string, any>,
+      _context: Record<string, any>,
+      _info: any
+    ) => account.blocked ?? false,
   },
   Query: {
     account: (_parent: undefined, args: Record<string, any>, _context: any, _info: any) => {
@@ -153,6 +159,18 @@ export const resolvers: GraphQLResolverMap<any> = {
       const roles = isModerator ? ["author"] : ["moderator"];
       const permissions = isModerator ? authorPermissions : [...authorPermissions, ...moderatorPermissions];
       return auth0.updateUser({ id }, { app_metadata: { groups: [], roles, permissions } });
+    },
+    changeAccountBlockedStatus: async (
+      _parent: undefined,
+      args: Record<string, any>,
+      _context: any,
+      _info: any
+    ) => {
+      const {
+        where: { id },
+      } = args as { where: { id: string } };
+      const { blocked } = await auth0.getUser({ id });
+      return auth0.updateUser({ id }, { blocked: !Boolean(blocked) });
     },
   },
 };
