@@ -122,5 +122,37 @@ export const resolvers: GraphQLResolverMap<any> = {
         return false;
       }
     },
+    changeAccountModeratorRole: async (
+      _parent: undefined,
+      args: Record<string, any>,
+      _context: any,
+      _info: any
+    ) => {
+      const {
+        where: { id },
+      } = args as { where: { id: string } };
+
+      const authorPermissions = [
+        "read:own_account",
+        "edit:own_account",
+        "read:any_profile",
+        "edit:own_profile",
+        "read:any_content",
+        "edit:own_content",
+        "upload:own_media",
+      ];
+
+      const moderatorPermissions = [
+        "read:any_account",
+        "block:any_account",
+        "promote:any_account",
+        "block:any_content",
+      ];
+      const user = await auth0.getUser({ id });
+      const isModerator = (user.app_metadata?.roles as string[])?.includes("moderator") ?? false;
+      const roles = isModerator ? ["author"] : ["moderator"];
+      const permissions = isModerator ? authorPermissions : [...authorPermissions, ...moderatorPermissions];
+      return auth0.updateUser({ id }, { app_metadata: { groups: [], roles, permissions } });
+    },
   },
 };

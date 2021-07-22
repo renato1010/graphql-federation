@@ -28,5 +28,6 @@ export const typeDefs = gql`
     createAccount(data: CreateAccountInput): Account!
     updateAccount(data: updateAccountInput!, where: AccountWhereUniqueInput!): Account!
     deleteAccount(where: AccountWhereUniqueInput!): Boolean!
+    changeAccountModeratorRole(where: AccountWhereUniqueInput): Account!
   }
 `;
