@@ -58,7 +58,24 @@ export const resolvers: GraphQLResolverMap<any> = {
       const {
         data: { email, password },
       } = args as { data: { email: string; password: string } };
-      return auth0.createUser({ connection: "Username-Password-Authentication", email, password });
+      return auth0.createUser({
+        app_metadata: {
+          groups: [],
+          roles: ["author"],
+          permissions: [
+            "read:own_account",
+            "edit:own_account",
+            "read:any_profile",
+            "edit:own_profile",
+            "read:any_content",
+            "edit:own_content",
+            "upload:own_media",
+          ],
+        },
+        connection: "Username-Password-Authentication",
+        email,
+        password,
+      });
     },
     updateAccount: async (_parent: undefined, args: Record<string, any>, _context: any, _info: any) => {
       const {
