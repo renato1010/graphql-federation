@@ -35,5 +35,5 @@ export const getToken = async (username: string, password: string): Promise<stri
 };
 
 // (async () => {
-//   await getToken("renatoperezc@gmail.com", "Rp101010");
+//   await getToken("contact@renatoperez.dev", "Cc101010");
 // })();

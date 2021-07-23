@@ -53,7 +53,7 @@ export const resolvers: GraphQLResolverMap<any> = {
       { user }: { user: Record<string, any> },
       _info: any
     ) => {
-      if (user?.sub ?? undefined) {
+      if (user?.sub) {
         return auth0.getUser({ id: user.sub });
       }
       return null;

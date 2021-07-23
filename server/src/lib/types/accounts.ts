@@ -3,3 +3,9 @@ export type UpdateAccountInput = {
   newPassword?: string;
   password?: string;
 };
+
+export type CustomAppMetadata = {
+  groups: string[];
+  permissions: string[];
+  roles: string[];
+};
