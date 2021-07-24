@@ -1,10 +1,11 @@
 import { gql } from "apollo-server";
 
 export const typeDefs = gql`
+  scalar DateTime
   type Account @key(fields: "id") {
     id: ID!
     email: String
-    createdAt: String!
+    createdAt: DateTime!
     isModerator: Boolean
     isBlocked: Boolean
   }

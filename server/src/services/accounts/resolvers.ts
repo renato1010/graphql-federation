@@ -4,8 +4,10 @@ import { User, AppMetadata, UserMetadata } from "auth0";
 import { auth0 } from "../../config";
 import { getToken } from "../../lib/getToken";
 import { UpdateAccountInput } from "../../lib/types";
+import { DateTimeResolver } from "../../lib/customScalars";
 
 export const resolvers: GraphQLResolverMap<any> = {
+  DateTime: DateTimeResolver,
   Account: {
     __resolveReference(reference: { id: string }, _context: any, _info: any) {
       return auth0.getUser({ id: reference.id });
