@@ -27,7 +27,7 @@ export const getToken = async (username: string, password: string): Promise<stri
     });
 
     const data = await response.json();
-    // console.log({ accessToken: data?.access_token ?? "no token" });
+    console.log({ accessToken: data?.access_token ?? "no token" });
     return data?.access_token ?? null;
   } catch (error) {
     throw new Error(error);
@@ -35,5 +35,5 @@ export const getToken = async (username: string, password: string): Promise<stri
 };
 
 // (async () => {
-//   await getToken("renatoperezpersonal@gmail.com", "Rpp101010");
+//   await getToken("renatoperezc@gmail.com", "Rpc101010");
 // })();

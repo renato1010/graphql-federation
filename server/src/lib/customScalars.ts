@@ -1,6 +1,6 @@
 import { ApolloError } from "apollo-server";
 import { GraphQLScalarType } from "graphql";
-import isISO8601 from "validator/es/lib/isISO8601";
+import { isISO8601 } from "@fireflysemantics/validatorts";
 
 export const DateTimeResolver = new GraphQLScalarType({
   name: "DateTime",
